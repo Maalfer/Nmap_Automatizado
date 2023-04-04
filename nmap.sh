@@ -28,7 +28,7 @@ iptest() {
   echo -ne "$greenColour\n[?]$grayColour Introduce la IP: " && read ip
   ping -c 1 $ip | grep "ttl" > /dev/null 2>&1
   if [ "$(echo $?)" -ne 0 ]; then
-    echo -e "$redColour[!]$grayColour No se encuentra activa la IP"
+    echo -e "$redColour[!]$grayColour No se encuentra activa la IP"; sleep 3
     iptest
   fi
 }
@@ -41,7 +41,7 @@ else
     clear
     iptest
     while true; do
-      echo -e "\n\t1) Escaneo rapido pero ruidoso"
+      echo -e "\n1) Escaneo rapido pero ruidoso"
       echo "2) Escaneo Normal"
       echo "3) Escaneo silencioso (Puede tardar un poco mas de lo normal)"
       echo "4) Escaneo de serviciosos y versiones"
