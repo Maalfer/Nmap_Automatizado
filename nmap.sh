@@ -11,16 +11,18 @@ grayColour="\e[0;37m\033[1m"
 
 nmaptest() {
   
-  test -f /usr/bin/nmap
-  if [ "$(echo $?)" -ne 0 ]; then
-    sudo apt-get install nmap -y > /dev/null 2>&1
+  dep=(nmap whatweb)
+  for i in "$dep[@]"; do
+    test -f /usr/bin/$i
     if [ "$(echo $?)" -ne 0 ]; then
-      sudo dnf install nmap -y > /dev/null 2>&1
-    elif [ "$(echo $?)" -ne 0 ]; then
-      sudo pacman -S nmap -y > /dev/null 2>&1
+      sudo apt-get install $i -y > /dev/null 2>&1
+      if [ "$(echo $?)" -ne 0 ]; then
+        sudo dnf install $i -y > /dev/null 2>&1
+      elif [ "$(echo $?)" -ne 0 ]; then
+        sudo pacman -S $i -y > /dev/null 2>&1
+      fi
     fi
-  fi
-
+  done
 }
 
 iptest() {
@@ -45,7 +47,8 @@ else
       echo "2) Escaneo Normal"
       echo "3) Escaneo silencioso (Puede tardar un poco mas de lo normal)"
       echo "4) Escaneo de serviciosos y versiones"
-      echo "5) Salir"
+      echo "5) WhatWeb"
+      echo "6) Salir"
       echo -ne "$greenColour\n[?]$grayColour Seleccione una opcion: " && read opcion
       case $opcion in
        1)
@@ -61,6 +64,9 @@ else
        clear && echo "Escaneando..." && nmap -sV -sC $ip		
        ;;
        5)
+       whatweb $ip
+       ;;
+       6)
        break
        ;;
        *)
