@@ -41,7 +41,7 @@ else
     clear
     iptest
     while true; do
-      echo -e "\n\t1) Escaneo rapido pero ruidoso"
+      echo -e "\n1) Escaneo rapido pero ruidoso"
       echo "2) Escaneo Normal"
       echo "3) Escaneo silencioso (Puede tardar un poco mas de lo normal)"
       echo "4) Escaneo de serviciosos y versiones"
