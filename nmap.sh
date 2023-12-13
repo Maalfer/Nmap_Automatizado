@@ -34,7 +34,7 @@ iptest() {
 }
 
 if [ $(id -u) -ne 0 ]; then
-	echo -e "\n$redColour[!]$grayColour Debes ser root para ejecutar el script -> (sudo $0)"
+        echo -e "\n$redColour[!]$grayColour Debes ser root para ejecutar el script -> (sudo $0)"
 exit 1
 else
     nmaptest
@@ -45,7 +45,9 @@ else
       echo "2) Escaneo Normal"
       echo "3) Escaneo silencioso (Puede tardar un poco mas de lo normal)"
       echo "4) Escaneo de serviciosos y versiones"
-      echo "5) Salir"
+      echo "5) Escaneo Completo"
+      echo "6) Escaneo de protocolos UDP" 
+      echo "7) Salir"
       echo -ne "$greenColour\n[?]$grayColour Seleccione una opcion: " && read opcion
       case $opcion in
        1)
@@ -58,9 +60,15 @@ else
        clear && echo "Escaneando..." && nmap -p- -T2 -sS -Pn -f $ip | grep -E "^[0-9]+\/[a-z]+\s+open\s+[a-z]+"
        ;;
        4)
-       clear && echo "Escaneando..." && nmap -sV -sC $ip		
+       clear && echo "Escaneando..." && nmap -sV -sC $ip
        ;;
        5)
+       clear && echo "Escaneando..." && nmap -p- -sS -sV -sC --min-rate 5000 -n -Pn $ip
+       ;;
+       6)
+       clear && echo "Escaneando..." && nmap -sU --top-ports 200 --min-rate=5000 -n -Pn $ip
+       ;;
+       7)
        break
        ;;
        *)
@@ -76,3 +84,4 @@ finish() {
 }
 
 trap finish SIGINT
+
