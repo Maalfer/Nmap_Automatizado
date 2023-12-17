@@ -26,8 +26,10 @@ nmaptest() {
 }
 
 enter(){
+  
   echo -ne "\n\n${greenColour}[!]$grayColour Enter para continuar" && read
   clear
+  tput cnorm
 }
 
 iptest() {
@@ -48,7 +50,7 @@ else
     clear
     iptest
     while true; do
-      echo -e "\n1) Escaneo rapido pero ruidoso"
+      echo -e "\n\n1) Escaneo rapido pero ruidoso"
       echo "2) Escaneo Normal"
       echo "3) Escaneo silencioso (Puede tardar un poco mas de lo normal)"
       echo "4) Escaneo de serviciosos y versiones"
@@ -57,23 +59,28 @@ else
       echo -ne "$greenColour\n[?]$grayColour Seleccione una opcion: " && read opcion
       case $opcion in
        1)
-       clear && echo "Escaneando..." && nmap -p- --open --min-rate 5000 -T5 -sS -Pn -n -v $ip | grep -E "^[0-9]+\/[a-z]+\s+open\s+[a-z]+"
+       tput civis 
+       clear && echo -ne "\n\n${greenColour}[+]${grayColour}Escaneando...\n" && nmap -p- --open --min-rate 5000 -T5 -sS -Pn -n -v $ip | grep -E "^[0-9]+\/[a-z]+\s+open\s+[a-z]+"
        enter
        ;;
        2)
-       clear && echo "Escaneando..." && nmap -p- --open $ip | grep -E "^[0-9]+\/[a-z]+\s+open\s+[a-z]+"
+       tput civis
+       clear && echo -ne "\n\n${greenColour}[+]${grayColour}Escaneando...\n" && nmap -p- --open $ip | grep -E "^[0-9]+\/[a-z]+\s+open\s+[a-z]+"
        enter
        ;;
        3)
-       clear && echo "Escaneando..." && nmap -p- -T2 -sS -Pn -f $ip | grep -E "^[0-9]+\/[a-z]+\s+open\s+[a-z]+"
+       tput civis
+       clear && echo -ne "\n\n${greenColour}[+]${grayColour}Escaneando...\n" && nmap -p- -T2 -sS -Pn -f $ip | grep -E "^[0-9]+\/[a-z]+\s+open\s+[a-z]+"
        enter
        ;;
        4)
-       clear && echo "Escaneando..." && nmap -sV -sC $ip		
+       tput civis
+       clear && echo -ne "\n\n${greenColour}[+]${grayColour}Escaneando...\n" && nmap -sV -sC $ip		
        enter
        ;;
        5)
-       whatweb $ip
+       tput civis
+       clear && echo -ne "\n\n${greenColour}[+]${grayColour}Escaneando...\n" && whatweb $ip
        enter
        ;;
        6)
