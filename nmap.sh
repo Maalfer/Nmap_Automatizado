@@ -25,6 +25,11 @@ nmaptest() {
   done
 }
 
+enter(){
+  echo -ne "\n\n${greenColour}[!]$grayColour Enter para continuar" && read
+  clear
+}
+
 iptest() {
   clear
   echo -ne "$greenColour\n[?]$grayColour Introduce la IP: " && read ip
@@ -53,18 +58,23 @@ else
       case $opcion in
        1)
        clear && echo "Escaneando..." && nmap -p- --open --min-rate 5000 -T5 -sS -Pn -n -v $ip | grep -E "^[0-9]+\/[a-z]+\s+open\s+[a-z]+"
+       enter
        ;;
        2)
        clear && echo "Escaneando..." && nmap -p- --open $ip | grep -E "^[0-9]+\/[a-z]+\s+open\s+[a-z]+"
+       enter
        ;;
        3)
        clear && echo "Escaneando..." && nmap -p- -T2 -sS -Pn -f $ip | grep -E "^[0-9]+\/[a-z]+\s+open\s+[a-z]+"
+       enter
        ;;
        4)
        clear && echo "Escaneando..." && nmap -sV -sC $ip		
+       enter
        ;;
        5)
        whatweb $ip
+       enter
        ;;
        6)
        break
