@@ -60,27 +60,27 @@ else
       case $opcion in
        1)
        tput civis 
-       clear && echo -ne "\n\n${greenColour}[+]${grayColour}Escaneando...\n" && nmap -p- --open --min-rate 5000 -T5 -sS -Pn -n -v $ip | grep -E "^[0-9]+\/[a-z]+\s+open\s+[a-z]+"
+       clear && echo -ne "\n${greenColour}[+]${grayColour} Escaneando...\n\n" && nmap -p- --open --min-rate 5000 -T5 -sS -Pn -n -v $ip | grep -E "^[0-9]+\/[a-z]+\s+open\s+[a-z]+"
        enter
        ;;
        2)
        tput civis
-       clear && echo -ne "\n\n${greenColour}[+]${grayColour}Escaneando...\n" && nmap -p- --open $ip | grep -E "^[0-9]+\/[a-z]+\s+open\s+[a-z]+"
+       clear && echo -ne "\n${greenColour}[+]${grayColour} Escaneando...\n\n" && nmap -p- --open $ip | grep -E "^[0-9]+\/[a-z]+\s+open\s+[a-z]+"
        enter
        ;;
        3)
        tput civis
-       clear && echo -ne "\n\n${greenColour}[+]${grayColour}Escaneando...\n" && nmap -p- -T2 -sS -Pn -f $ip | grep -E "^[0-9]+\/[a-z]+\s+open\s+[a-z]+"
+       clear && echo -ne "\n${greenColour}[+]${grayColour} Escaneando...\n\n" && nmap -p- -T2 -sS -Pn -f $ip | grep -E "^[0-9]+\/[a-z]+\s+open\s+[a-z]+"
        enter
        ;;
        4)
        tput civis
-       clear && echo -ne "\n\n${greenColour}[+]${grayColour}Escaneando...\n" && nmap -sV -sC $ip		
+       clear && echo -ne "\n${greenColour}[+]${grayColour} Escaneando...\n\n" && nmap -sV -sC $ip		
        enter
        ;;
        5)
        tput civis
-       clear && echo -ne "\n\n${greenColour}[+]${grayColour}Escaneando...\n" && whatweb $ip
+       clear && echo -ne "\n${greenColour}[+]${grayColour} Escaneando...\n\n" && whatweb $ip
        enter
        ;;
        6)
